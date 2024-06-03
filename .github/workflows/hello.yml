@@ -25,12 +25,12 @@
 #       - run: echo "${{ inputs.greeting }}"
 
 # コード2.5
-name: Schedule
-on:
-  schedule:
-    - cron: '*/15 * * * *'
-jobs:
-  run:
-    runs-on: ubuntu-latest
-    steps:
-      - run: date
+# name: Schedule
+# on:
+#   schedule:
+#     - cron: '*/15 * * * *'
+# jobs:
+#   run:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - run: date
