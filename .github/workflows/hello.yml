@@ -1,3 +1,4 @@
+# コード2.1
 # name: Hello
 # on: push
 # jobs:
@@ -6,17 +7,30 @@
 #     steps:
 #       - run: echo  "Hello, world"
 #       - uses: actions/checkout@v4
-name: Manual
+
+# コード2.4
+# name: Manual
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       greeting:
+#         type: string
+#         default: Hello
+#         required: true
+#         description: A cheerful word
+# jobs:
+#   run:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - run: echo "${{ inputs.greeting }}"
+
+# コード2.5
+name: Schedule
 on:
-  workflow_dispatch:
-    inputs:
-      greeting:
-        type: string
-        default: Hello
-        required: true
-        description: A cheerful word
+  schedule:
+    - cron: '*/15 * * * *'
 jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "${{ inputs.greeting }}"
+      - run: date
