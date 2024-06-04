@@ -97,6 +97,6 @@ jobs:
         runs-on: ubuntu-latest
         env:
             PASSWORD: ${{ secrets.PASSWORD }}
-        step:
-            - run echo "${PASSWORD}"
-            - run echo "${PASSWORD:0:1} ${PASSWORD#?}"
+        steps:
+            - run: echo "${PASSWORD}"
+            - run: echo "${PASSWORD:0:1} ${PASSWORD#?}"
