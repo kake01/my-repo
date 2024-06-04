@@ -35,10 +35,23 @@
 #     steps:
 #       - run: date
 # コード3.1
-name: Contexts
+# name: Contexts
+# on: push
+# jobs:
+#   print:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - run: echo "${{ github.actor }}"
+# コード3.2
+name: Environment variables
 on: push
 jobs:
-  print:
+  run:
     runs-on: ubuntu-latest
+    env:
+      BRANCH: main
     steps:
-      - run: echo "${{ github.actor }}"
+      - run: echo "${BRANCH}"
+      - uses: actions/chekout@4
+        with:
+          ref: ${{env.BRANCH}}
