@@ -69,12 +69,22 @@
 #           EXAMPLE: Defined by step level
 #         run: echo "$EXAMPLE"
 # コード3.4
-name: Intermediate environment variables
+# name: Intermediate environment variables
+# on: push
+# jobs:
+#   print:
+#     runs-on: ubuntu-latest
+#     env:
+#       ACTOR: ${{github.actor}}
+#     steps:
+#       - run: echo "${ACTOR}"
+# コード3.5
+name: Variables
 on: push
 jobs:
   print:
     runs-on: ubuntu-latest
     env:
-      ACTOR: ${{github.actor}}
+      USERNAME: ${{vars.USERNAME}}
     steps:
-      - run: echo "${ACTOR}"
+      - run echo "${USERNAME}"
