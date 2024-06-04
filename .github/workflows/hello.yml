@@ -35,7 +35,7 @@
 #     steps:
 #       - run: date
 # コード3.1
-name:Contexts
+name: Contexts
 on: push
 jobs:
   print:
