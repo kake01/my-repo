@@ -52,6 +52,6 @@ jobs:
       BRANCH: main
     steps:
       - run: echo "${BRANCH}"
-      - uses: actions/chekout@4
+      - uses: actions/checkout@4
         with:
           ref: ${{env.BRANCH}}
