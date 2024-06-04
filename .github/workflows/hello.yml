@@ -109,8 +109,8 @@ jobs:
         steps:
             - run: printenv | grep 'LITERAL_'
               env:
-                _NULL: ${{ null }}
-                _BOOLEAN: ${{ true }}
-                _NUMBER: ${{ 123 }}
-                _STRING: ${{ 'hell' }}
-                _OMIT_STRING: Word
+                LITERAL_NULL: ${{ null }}
+                LITERAL_BOOLEAN: ${{ true }}
+                LITERAL_NUMBER: ${{ 123 }}
+                LITERAL_STRING: ${{ 'hell' }}
+                LITERAL_OMIT_STRING: Word
