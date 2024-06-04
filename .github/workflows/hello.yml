@@ -90,13 +90,27 @@
 #     steps:
 #       - run: echo "${USERNAME}"
 # コード3.6
-name: Secrets
+# name: Secrets
+# on: push
+# jobs:
+#     print:
+#         runs-on: ubuntu-latest
+#         env:
+#             PASSWORD: ${{ secrets.PASSWORD }}
+#         steps:
+#             - run: echo "${PASSWORD}"
+#             - run: echo "${PASSWORD:0:1} ${PASSWORD#?}"
+# コード3.7
+name: Listerals
 on: push
 jobs:
     print:
         runs-on: ubuntu-latest
-        env:
-            PASSWORD: ${{ secrets.PASSWORD }}
         steps:
-            - run: echo "${PASSWORD}"
-            - run: echo "${PASSWORD:0:1} ${PASSWORD#?}"
+            - run: printenv | grep 'LITERAL_'
+              env:
+                _NULL: ${{ null }}
+                _BOOLEAN: ${{ true }}
+                _NUMBER: ${{ 123 }}
+                _STRING: ${{ 'hell' }}
+                _OMIT_STRING: Word
