@@ -115,14 +115,25 @@
 #                 LITERAL_STRING: ${{ 'hell' }}
 #                 LITERAL_OMIT_STRING: Word
 # コード3.8
-name: Compare functions
+# name: Compare functions
+# on: push
+# jobs:
+#     compare:
+#         runs-on: ubuntu-latest
+#         steps:
+#             - run: printenv | grep '_FUNC'
+#               env:
+#                 CONTAINS_FUNC: ${{ contains('Hello','ell') }}
+#                 STARTS_WITH_FUNC: ${{ startsWith('Hello','ell') }}
+                # ENDS_WITH_FUNC: ${{ endsWith('Hello','o') }}
+#コード3.9 
+name: Generate functions
 on: push
 jobs:
-    compare:
+    generate:
         runs-on: ubuntu-latest
         steps:
             - run: printenv | grep '_FUNC'
               env:
-                CONTAINS_FUNC: ${{ contains('Hello','ell') }}
-                STARTS_WITH_FUNC: ${{ startsWith('Hello','ell') }}
-                ENDS_WITH_FUNC: ${{ endsWith('Hello','o') }}
+                CONTAINS_FUNC: ${{ format('{0},{1}.','Hi', 'World') }}
+                STARTS_WITH_FUNC: ${{ join(github.event.*.html_url, ',') }}
