@@ -34,3 +34,11 @@
 #     runs-on: ubuntu-latest
 #     steps:
 #       - run: date
+# コード3.1
+name:Contexts
+on: push
+jobs:
+  print:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "${{ github.actor }}"
