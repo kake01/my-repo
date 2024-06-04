@@ -101,16 +101,28 @@
 #             - run: echo "${PASSWORD}"
 #             - run: echo "${PASSWORD:0:1} ${PASSWORD#?}"
 # コード3.7
-name: Listerals
+# name: Listerals
+# on: push
+# jobs:
+#     print:
+#         runs-on: ubuntu-latest
+#         steps:
+#             - run: printenv | grep 'LITERAL_'
+#               env:
+#                 LITERAL_NULL: ${{ null }}
+#                 LITERAL_BOOLEAN: ${{ true }}
+#                 LITERAL_NUMBER: ${{ 123 }}
+#                 LITERAL_STRING: ${{ 'hell' }}
+#                 LITERAL_OMIT_STRING: Word
+# コード3.8
+name: Compare functions
 on: push
 jobs:
-    print:
+    compare:
         runs-on: ubuntu-latest
         steps:
-            - run: printenv | grep 'LITERAL_'
+            - run: printenv | grep '_FUNC'
               env:
-                LITERAL_NULL: ${{ null }}
-                LITERAL_BOOLEAN: ${{ true }}
-                LITERAL_NUMBER: ${{ 123 }}
-                LITERAL_STRING: ${{ 'hell' }}
-                LITERAL_OMIT_STRING: Word
+                CONTAINS_FUNC: ${{ contains('Hello','ell') }}
+                STARTS_WITH_FUNC: ${{ startsWith('Hello','ell') }}
+                ENDS_WITH_FUNC: ${{ endsWith('Hello','o') }}
