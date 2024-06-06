@@ -178,11 +178,20 @@
 #             - run: echo "Hello"
 #               if: ${{ failure()}}
 # コード3.14
-name: Conditions workflow
+# name: Conditions workflow
+# on: push
+# jobs:
+#     skip-or-run:
+#         if: ${{github.actor == 'octocat'}}
+#         runs-on: ubuntu-latest
+#         steps:
+#             - run: echo "Hello"
+name: Naming
 on: push
 jobs:
-    skip-or-run:
-        if: ${{github.actor == 'octocat'}}
+    print:
+        name: Super Useful Job
         runs-on: ubuntu-latest
         steps:
-            - run: echo "Hello"
+            - name: Amazing Script
+              run: echo "Hello"
