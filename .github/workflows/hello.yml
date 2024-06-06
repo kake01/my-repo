@@ -186,12 +186,22 @@
 #         runs-on: ubuntu-latest
 #         steps:
 #             - run: echo "Hello"
-name: Naming
+# コード3.15
+# name: Naming
+# on: push
+# jobs:
+#     print:
+#         name: Super Useful Job
+#         runs-on: ubuntu-latest
+#         steps:
+#             - name: Amazing Script
+#               run: echo "Hello"
+# コード3.16
+name: Run Name
+run-name: Run by @${{github.actor}}
 on: push
 jobs:
     print:
-        name: Super Useful Job
         runs-on: ubuntu-latest
         steps:
-            - name: Amazing Script
-              run: echo "Hello"
+          - run: echo "Hello"
