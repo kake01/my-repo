@@ -227,11 +227,24 @@
 #                 RESULT: ${{steps.source.outputs.result}}
 #             run: echo "${RESULT}"
 # コード3.19
-name: GITHUB_ENV
-on: push
+# name: GITHUB_ENV
+# on: push
+# jobs:
+#     share:
+#         runs-on: ubuntu-latest
+#         steps:
+#           - run: echo "RESULT=Hello" >> "${GITHUB_ENV}"
+#           - run: echo "${RESULT}"
+# コード3.20
+name: Comment
+on: pull_request
 jobs:
-    share:
+    Comment:
         runs-on: ubuntu-latest
+        permissions:
+            pull-requests: write
+            contents: read
         steps:
-          - run: echo "RESULT=Hello" >> "${GITHUB_ENV}"
-          - run: echo "${RESULT}"
+          - run: gh pr commit "${GITHUB_HEAD_REF}" --body "Hello, ${GITHUB_ACTOR}"
+            env:
+                GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
