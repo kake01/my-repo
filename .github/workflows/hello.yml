@@ -167,12 +167,22 @@
 #         steps:
 #             - run: echo "Hello"
 #               if: ${{ contains(github.run_id, '1')}}
-name: Status check functions
+# コード3.13
+# name: Status check functions
+# on: push
+# jobs:
+#     fail:
+#         runs-on: ubuntu-latest
+#         steps:
+#             - run: exit 1
+#             - run: echo "Hello"
+#               if: ${{ failure()}}
+# コード3.14
+name: Conditions workflow
 on: push
 jobs:
-    fail:
+    skip-or-run:
+        if: ${{github.actor == 'octocat'}}
         runs-on: ubuntu-latest
         steps:
-            - run: exit 1
             - run: echo "Hello"
-              if: ${{ failure()}}
