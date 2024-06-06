@@ -138,12 +138,23 @@
 #                 CONTAINS_FUNC: ${{ format('{0},{1}.','Hi', 'World') }}
 #                 JOIN_FUNC: ${{ join(github.event.*.html_url, ',') }}
 # コード3.10
-name: JSON functions
+# name: JSON functions
+# on: push
+# jobs:
+#     dump:
+#         runs-on: ubuntu-latest
+#         steps:
+#             - run: echo "${CONTEXT}"
+#               env:
+#                 CONTEXT: ${{ toJson(github) }}
+# コード3.11
+name: Hash functions
 on: push
 jobs:
-    dump:
+    hash:
         runs-on: ubuntu-latest
         steps:
-            - run: echo "${CONTEXT}"
+            - uses: actions/checkout@v4
+            - run: echo "${HASH}"
               env:
-                CONTEXT: ${{ toJson(github) }}
+                HASH: ${{ hashFiles('.github/workflows/*.yml')}}
