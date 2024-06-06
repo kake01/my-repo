@@ -148,13 +148,22 @@
 #               env:
 #                 CONTEXT: ${{ toJson(github) }}
 # コード3.11
-name: Hash functions
+# name: Hash functions
+# on: push
+# jobs:
+#     hash:
+#         runs-on: ubuntu-latest
+#         steps:
+#             - uses: actions/checkout@v4
+#             - run: echo "${HASH}"
+#               env:
+#                 HASH: ${{ hashFiles('.github/workflows/*.yml')}}
+# コード3.12
+name: Condtions
 on: push
 jobs:
-    hash:
+    skip-or-run:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
-            - run: echo "${HASH}"
-              env:
-                HASH: ${{ hashFiles('.github/workflows/*.yml')}}
+            - run: echo "Hello"
+            if: ${{ contains(github.run_id, '1')}}
