@@ -159,12 +159,20 @@
 #               env:
 #                 HASH: ${{ hashFiles('.github/workflows/*.yml')}}
 # コード3.12
-name: Condtions
+# name: Condtions
+# on: push
+# jobs:
+#     skip-or-run:
+#         runs-on: ubuntu-latest
+#         steps:
+#             - run: echo "Hello"
+#               if: ${{ contains(github.run_id, '1')}}
+name: Status check functions
 on: push
 jobs:
-    skip-or-run:
+    fail:
         runs-on: ubuntu-latest
         steps:
-            - run: echo "{github.run_id}"
+            - run: exit 1
             - run: echo "Hello"
-              if: ${{ contains(github.run_id, 'None')}}
+              if: ${{ failure()}}
