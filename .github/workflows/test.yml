@@ -291,15 +291,24 @@
 #     steps:
 #       - run: sleep 120
 # コード4.8
-name: Change shell
+# name: Change shell
+# on: push
+# jobs:
+#   print:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - shell: bash
+#         run: echo "${SHELL}"
+#       - shell: python
+#         run: |
+#           import os
+#           print(os.environ['PATH'])
+# コード4.9
+name: Concurrency
 on: push
+concurrency: ${{ github.workflow }} # Concurrencyグループへワークフロー名を指定
 jobs:
-  print:
+  sleep:
     runs-on: ubuntu-latest
     steps:
-      - shell: bash
-        run: echo "${SHELL}"
-      - shell: python
-        run: |
-          import os
-          print(os.environ['PATH'])
+      - run: sleep 120
