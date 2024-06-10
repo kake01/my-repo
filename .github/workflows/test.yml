@@ -282,11 +282,24 @@
 #       - run: |
 #           docker run --rm -v "$(pwd):$(pwd)" -w "$(pwd)" rhysd/actionlint:latest
 # コード4.7
-name: Timeout
+# name: Timeout
+# on: push
+# jobs:
+#   sleep:
+#     runs-on: ubuntu-latest
+#     timeout-minutes: 1
+#     steps:
+#       - run: sleep 120
+# コード4.8
+name: Change shell
 on: push
 jobs:
-  sleep:
+  print:
     runs-on: ubuntu-latest
-    timeout-minutes: 1
     steps:
-      - run: sleep 120
+      - shell: bash
+        run: echo "${SHELL}"
+      - shell: python
+        run: |
+          import os
+          print(os.environ['PATH'])
