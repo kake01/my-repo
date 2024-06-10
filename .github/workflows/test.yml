@@ -236,15 +236,29 @@
 #           - run: echo "RESULT=Hello" >> "${GITHUB_ENV}"
 #           - run: echo "${RESULT}"
 # コード3.20
-name: Comment
-on: pull_request
+# name: Comment
+# on: pull_request
+# jobs:
+#     Comment:
+#         runs-on: ubuntu-latest
+#         permissions:
+#             pull-requests: write
+#             contents: read
+#         steps:
+#           - run: gh pr commit "${GITHUB_HEAD_REF}" --body "Hello, ${GITHUB_ACTOR}"
+#             env:
+#                 GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+# コード4.3
+name: Test
+on:
+    pull_request: 
+        paths: ['go/**/*.go']
 jobs:
-    Comment:
+    test:
         runs-on: ubuntu-latest
-        permissions:
-            pull-requests: write
-            contents: read
         steps:
-          - run: gh pr commit "${GITHUB_HEAD_REF}" --body "Hello, ${GITHUB_ACTOR}"
-            env:
-                GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+            - uses: actions/checkout@v4
+            - uses: setup-go@v5
+              with:
+                go-version: '1.22'
+            - run: go test go/excellent/*.go
