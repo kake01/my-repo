@@ -291,15 +291,36 @@
 #     steps:
 #       - run: sleep 120
 # コード4.8
-name: Change shell
-on: push
+# name: Change shell
+# on: push
+# jobs:
+#   print:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - shell: bash
+#         run: echo "${SHELL}"
+#       - shell: python
+#         run: |
+#           import os
+#           print(os.environ['PATH'])
+# コード4.9
+# name: Concurrency
+# on: push
+# concurrency: ${{ github.workflow }} # Concurrencyグループへワークフロー名を指定
+# jobs:
+#   sleep:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - run: sleep 120
+# コード4.10
+name: Auto cancel
+on: pull_request
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true # 同一グループのワークフローが実行中ならキャンセル
 jobs:
-  print:
+  sleep:
     runs-on: ubuntu-latest
     steps:
-      - shell: bash
-        run: echo "${SHELL}"
-      - shell: python
-        run: |
-          import os
-          print(os.environ['PATH'])
+      - run: sleep 120
+      
